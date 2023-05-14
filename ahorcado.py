@@ -85,6 +85,11 @@ class JuegoAhorcado:
 
             letra_actual = self.dime_letra(let_incorrectas + let_correctas)
 
+            if letra_actual == "TERMINAR":
+                print(self.ESTADOS[-1])
+                print('La palabra era "{}"'.format(secreto))
+                break
+
             if letra_actual in secreto:
 
                 let_correctas.append(letra_actual)
@@ -140,7 +145,8 @@ class JuegoAhorcado:
         while True:
             print('Adivina una letra.')
             adivina = input('> ').upper()
-            if len(adivina) != 1:
+
+            if len(adivina) != 1 and adivina.upper() != "TERMINAR":
                 print('Introduce una única letra.')
             elif adivina in ya_adivinadas:
                 print('Esa letra ya la sabías. Elige otra vez.')
