@@ -70,15 +70,21 @@ class JuegoAhorcado:
     / \ |
     ====="""]
 
-    categoria = 'FRUTAS'
-    palabras = 'PERA PLATANO UVA MANZANA MELOCOTON KIWI ALBARICOQUE CEREZA CIRUELA FRESA GRANADA HIGO LIMA LIMON ' \
+    categorias = 'FRUTAS ANIMALES VIDEOJUEGOS'.split()
+    frutas = 'PERA PLATANO UVA MANZANA MELOCOTON KIWI ALBARICOQUE CEREZA CIRUELA FRESA GRANADA HIGO LIMA LIMON ' \
                'MANDARINA NARANJA MELON MORA NISPERO PIÑA POMELO SANDIA '.split()
+    animales = 'MONO GORILA COCODRILO ELEFANTE GATO PERRO'.split()
+    videojuegos = 'ZELDA MARIO CSGO KIRBY DOOM WOLFESTEIN CASTLEVANIA'.split()
+
+    escoger = {'FRUTAS': frutas, 'ANIMALES': animales, 'VIDEOJUEGOS': videojuegos}
+    categoria = ''
 
     def jugar(self):
 
         let_incorrectas = []
         let_correctas = []
-        secreto = random.choice(self.palabras)
+        self.categoria = random.choice(self.categorias)
+        secreto = random.choice(self.escoger[self.categoria])
 
         while True:
             self.dibujar(let_incorrectas, let_correctas, secreto)
