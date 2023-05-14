@@ -74,6 +74,10 @@ class JuegoAhorcado:
     palabras = 'PERA PLATANO UVA MANZANA MELOCOTON KIWI ALBARICOQUE CEREZA CIRUELA FRESA GRANADA HIGO LIMA LIMON ' \
                'MANDARINA NARANJA MELON MORA NISPERO PIÑA POMELO SANDIA '.split()
 
+
+    def get_intentos(self, fallos):
+        return len(self.ESTADOS) - 1
+
     def jugar(self):
 
         self.nombre_jugador = str(input("Cual es tu nombre? "))
@@ -104,12 +108,13 @@ class JuegoAhorcado:
 
             else:
                 let_incorrectas.append(letra_actual)
-
                 if len(let_incorrectas) == len(self.ESTADOS) - 1:
                     self.dibujar(let_incorrectas, let_correctas, secreto)
                     print('Demasiados intentos!')
                     print('La palabra era "{}"'.format(secreto))
                     break
+                print("Te quedan {} intentos".format(self.get_intentos(len(let_incorrectas))))
+
 
     def dibujar(self, incorrectas, correctas, secreto):
         print(self.ESTADOS[len(incorrectas)])
