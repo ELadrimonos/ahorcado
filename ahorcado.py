@@ -72,14 +72,20 @@ class JuegoAhorcado:
 
     categorias = 'FRUTAS ANIMALES VIDEOJUEGOS'.split()
     frutas = 'PERA PLATANO UVA MANZANA MELOCOTON KIWI ALBARICOQUE CEREZA CIRUELA FRESA GRANADA HIGO LIMA LIMON ' \
-               'MANDARINA NARANJA MELON MORA NISPERO PIÑA POMELO SANDIA '.split()
+             'MANDARINA NARANJA MELON MORA NISPERO PIÑA POMELO SANDIA '.split()
     animales = 'MONO GORILA COCODRILO ELEFANTE GATO PERRO'.split()
     videojuegos = 'ZELDA MARIO CSGO KIRBY DOOM WOLFESTEIN CASTLEVANIA'.split()
 
     escoger = {'FRUTAS': frutas, 'ANIMALES': animales, 'VIDEOJUEGOS': videojuegos}
     categoria = ''
+    nombre_jugador = ''
+
+    def get_intentos(self, fallos):
+        return len(self.ESTADOS) - fallos - 1
 
     def jugar(self):
+
+        self.nombre_jugador = str(input("Cual es tu nombre? "))
 
         let_incorrectas = []
         let_correctas = []
@@ -108,17 +114,17 @@ class JuegoAhorcado:
                 if g:
                     print(self.SALVADO[0])
                     print('¡Bien hecho! la palabra secreta es :', secreto)
-                    print('Has ganado!')
+                    print('Has ganado, {}!'.format(self.nombre_jugador))
                     break
 
             else:
                 let_incorrectas.append(letra_actual)
-
                 if len(let_incorrectas) == len(self.ESTADOS) - 1:
                     self.dibujar(let_incorrectas, let_correctas, secreto)
                     print('Demasiados intentos!')
                     print('La palabra era "{}"'.format(secreto))
                     break
+                print("Te quedan {} intentos".format(self.get_intentos(len(let_incorrectas))))
 
     def dibujar(self, incorrectas, correctas, secreto):
         print(self.ESTADOS[len(incorrectas)])
